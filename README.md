@@ -52,7 +52,7 @@ To get started with this project, make sure you have the following installed:
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/<your-username>/Project-Event_driven_Arch.git
+git clone https://github.com/jayeshjeh/Project-Event_driven_Arch.git
 cd Project-Event_driven_Arch
 ```
 
