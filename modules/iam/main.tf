@@ -32,7 +32,6 @@ data "aws_iam_policy_document" "sqs_read" {
 data "aws_iam_policy_document" "cw_logs" {
     statement {
       actions = [
-        "logs:CloudLogGroup",
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents"
