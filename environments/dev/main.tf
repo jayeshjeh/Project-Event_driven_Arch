@@ -74,11 +74,11 @@ resource "aws_iam_openid_connect_provider" "github" {
   client_id_list = ["sts.amazonaws.com"]
 
   thumbprint_list = [
-    "6938fd4d98bab03faadb97b34396831e3780aea1"  # GitHub's OIDC thumbprint
+    "6938fd4d98bab03faadb97b34396831e3780aea1"  
   ]
 }
 
-# IAM Role for GitHub Actions
+
 resource "aws_iam_role" "github_actions" {
   name = "${var.name_prefix}-github-oidc-role"
 
@@ -96,6 +96,7 @@ resource "aws_iam_role" "github_actions" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           },
           StringLike = {
+            
             "token.actions.githubusercontent.com:sub" = "repo:jayeshjeh/Project-Event_driven_Arch:ref:refs/heads/main"
 
           }
@@ -107,8 +108,8 @@ resource "aws_iam_role" "github_actions" {
   tags = var.tags
 }
 
-# Attach policy to allow Terraform operations
+
 resource "aws_iam_role_policy_attachment" "github_terraform_attach" {
   role       = aws_iam_role.github_actions.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"  
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess" 
 }
