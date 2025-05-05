@@ -33,6 +33,6 @@ batch_size = 5
 tags = {
   Environment = "dev"
   Project     = "event-driven-architecture"
-  Owner       = "jayeshjeh"
+  Owner       = "jayesh"
 }
 
