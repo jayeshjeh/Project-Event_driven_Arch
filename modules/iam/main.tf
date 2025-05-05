@@ -74,7 +74,7 @@ resource "aws_iam_policy" "cw_logs_policy" {
 
 resource "aws_iam_role_policy_attachment" "attach_sqs_read" {
     role = aws_iam_role.lambda_exec.name
-    policy_arn = aws_iam_policy.cw_logs_policy.arn
+    policy_arn = aws_iam_policy.sqs_read_policy.arn
 }
 
 
