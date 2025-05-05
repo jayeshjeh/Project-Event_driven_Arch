@@ -49,7 +49,7 @@ module "iam" {
 module "lambda" {
   source                = "../../modules/lambda"
   function_name         = var.function_name
-  lambda_role_arn       = module.lambda_role_arn
+  lambda_role_arn       = module.iam.lambda_role_arn
   runtime               = var.runtime
   handler               = var.handler
   lambda_package        = var.lambda_package
@@ -59,11 +59,11 @@ module "lambda" {
 
 module "event_mapping" {
   source              = "../../modules/event_mapping"
-  lambda_function_arn = module.lambda_function_arn
-  sqs_queue_arn       = module.sqs_queue_arn
+  lambda_function_arn = module.iam.lambda_function_arn
+  sqs_queue_arn       = module.sqs.queue_arn
   batch_size          = var.batch_size
-  depends_on_lambda   = module.lambda_function_arn
-  depends_on_sqs      = module.sqs_queue_arn
+  depends_on_lambda   = module.lambda.lambda_function_arn
+  depends_on_sqs      = module.sqs.queue_arn
 }
 
 
@@ -74,7 +74,7 @@ resource "aws_iam_openid_connect_provider" "github" {
   client_id_list = ["sts.amazonaws.com"]
 
   thumbprint_list = [
-    "6938fd4d98bab03faadb97b34396831e3780aea1"  
+    "6938fd4d98bab03faadb97b34396831e3780aea1"
   ]
 }
 
@@ -96,7 +96,7 @@ resource "aws_iam_role" "github_actions" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           },
           StringLike = {
-            
+
             "token.actions.githubusercontent.com:sub" = "repo:jayeshjeh/Project-Event_driven_Arch:ref:refs/heads/main"
 
           }
@@ -111,5 +111,5 @@ resource "aws_iam_role" "github_actions" {
 
 resource "aws_iam_role_policy_attachment" "github_terraform_attach" {
   role       = aws_iam_role.github_actions.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess" 
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
