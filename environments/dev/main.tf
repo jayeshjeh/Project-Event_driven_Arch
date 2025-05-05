@@ -59,7 +59,7 @@ module "lambda" {
 
 module "event_mapping" {
   source              = "../../modules/event_mapping"
-  lambda_function_arn = module.iam.lambda_function_arn
+  lambda_function_arn = module.lambda.lambda_function_arn
   sqs_queue_arn       = module.sqs.queue_arn
   batch_size          = var.batch_size
   depends_on_lambda   = module.lambda.lambda_function_arn
