@@ -103,7 +103,7 @@ In the `.github/workflows` directory, the `terraform.yml` file defines the CI/CD
 You can manually test the Lambda function by sending a message to the SQS queue:
 
 ```bash
-aws sqs send-message --queue-url <SQS_QUEUE_URL> --message-body '{"type":"build_succeeded","build_id":123}'
+aws sqs send-message --queue-url $(terraform output -raw sqs_queue_url) --message-body '{"type":"build_succeeded","build_id":123}'
 ```
 
 To view the logs for the Lambda function, use:
