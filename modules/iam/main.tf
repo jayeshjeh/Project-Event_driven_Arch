@@ -81,7 +81,7 @@ resource "aws_iam_role_policy_attachment" "attach_sqs_read" {
 #Attach Cloudwatch Policy to role
 
 resource "aws_iam_role_policy_attachment" "attach_cw_logs" {
-    role = aws_iam_policy.cw_logs_policy.name
+    role = aws_iam_role.lambda_exec.name
     policy_arn = aws_iam_policy.cw_logs_policy.arn
   
 }
